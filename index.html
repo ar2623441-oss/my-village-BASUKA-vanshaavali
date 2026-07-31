@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>वंशावली — Vanshaavali</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Tiro+Devanagari+Hindi:ital@0;1&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --ink:       #1a120b;
+      --parchment: #f5ede0;
+      --cream:     #fdf6ec;
+      --gold:      #b5862a;
+      --gold-lt:   #d4a84b;
+      --rust:      #8b3a2a;
+      --sage:      #4a5e4a;
+      --border:    #c9a96e;
+      --shadow:    rgba(26,18,11,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* ── Decorative background texture ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: -1;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(181,134,42,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 90%, rgba(139,58,42,0.06) 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1' fill='%23b5862a' opacity='0.08'/%3E%3C/svg%3E");
+    }
+
+    /* ══════════════ HEADER ══════════════ */
+    header {
+      background: linear-gradient(160deg, #1a120b 0%, #2e1f0e 60%, #3d2a10 100%);
+      color: var(--parchment);
+      text-align: center;
+      padding: 3.5rem 1.5rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    header::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-lt), var(--gold), transparent);
+    }
+
+    .header-ornament {
+      font-size: 1.5rem;
+      color: var(--gold-lt);
+      letter-spacing: 0.5rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.8;
+    }
+
+    header h1 {
+      font-family: 'Tiro Devanagari Hindi', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      color: var(--gold-lt);
+      line-height: 1.1;
+      text-shadow: 0 2px 20px rgba(181,134,42,0.4);
+      letter-spacing: 0.02em;
+    }
+
+    header .subtitle {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: #d4b896;
+      margin-top: 0.6rem;
+      letter-spacing: 0.08em;
+    }
+
+    .header-meta {
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      color: #a08060;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ══════════════ NAV ══════════════ */
+    nav {
+      background: #2e1f0e;
+      border-bottom: 2px solid var(--gold);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    nav ul {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      list-style: none; gap: 0; max-width: 1100px; margin: 0 auto;
+    }
+    nav ul li a {
+      display: block;
+      color: #d4b896;
+      text-decoration: none;
+      padding: 0.85rem 1.3rem;
+      font-family: 'EB Garamond', serif;
+      font-size: 0.97rem;
+      letter-spacing: 0.06em;
+      transition: color 0.2s, background 0.2s;
+      border-bottom: 3px solid transparent;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: var(--gold-lt);
+      border-bottom-color: var(--gold-lt);
+      background: rgba(181,134,42,0.08);
+    }
+
+    /* ══════════════ LAYOUT ══════════════ */
+    .page-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .page-wrap { grid-template-columns: 1fr; }
+    }
+
+    main { min-width: 0; }
+
+    /* ══════════════ SECTIONS ══════════════ */
+    .section {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .section.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ══════════════ CARDS / BOXES ══════════════ */
+    .card {
+      background: #fff9f0;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 2rem 2.2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 14px var(--shadow);
+      position: relative;
+    }
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: linear-gradient(180deg, var(--gold), var(--rust));
+      border-radius: 2px 0 0 2px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.85rem;
+      color: var(--rust);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    h2 .hindi { font-family: 'Tiro Devanagari Hindi', serif; font-size: 1.2rem; color: var(--gold); margin-left: 0.5rem; }
+
+    h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--sage);
+      margin: 1.4rem 0 0.5rem;
+    }
+
+    p { margin-bottom: 0.9rem; }
+
+    /* ══════════════ HERO INTRO ══════════════ */
+    .hero-intro {
+      background: linear-gradient(135deg, #fff9f0, #fdf0d8);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 2.2rem 2.5rem;
+      margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      align-items: center;
+      box-shadow: 0 3px 20px var(--shadow);
+    }
+    .hero-icon {
+      font-size: 4rem;
+      line-height: 1;
+      filter: sepia(40%);
+    }
+    .hero-intro h2 { border: none; margin: 0 0 0.4rem; padding: 0; font-size: 1.6rem; }
+    .hero-intro p { margin: 0; color: #5a3e28; font-size: 1.05rem; }
+
+    /* ══════════════ STATS BAR ══════════════ */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-box {
+      background: var(--ink);
+      color: var(--parchment);
+      text-align: center;
+      padding: 1.2rem 0.8rem;
+      border-radius: 2px;
+      box-shadow: 0 2px 10px var(--shadow);
+    }
+    .stat-box .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--gold-lt);
+      display: block;
+      line-height: 1;
+    }
+    .stat-box .lbl { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: #c8a87a; margin-top: 0.3rem; display: block; }
+
+    /* ══════════════ FAMILY TREE ══════════════ */
+    .tree-container {
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+    .tree {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 600px;
+      gap: 0;
+    }
+    .tree-gen {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      position: relative;
+      padding: 1rem 0;
+    }
+    .tree-gen::before {
+      content: '';
+      position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 2px; height: 1rem;
+      background: var(--gold);
+    }
+    .tree-gen:first-child::before { display: none; }
+
+    .tree-connector {
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1rem;
+      display: flex; align-items: flex-end; justify-content: center;
+    }
+
+    .person-node {
+      background: #fff9f0;
+      border: 1.5px solid var(--border);
+      border-radius: 2px;
+      padding: 0.7rem 1rem;
+      text-align: center;
+      min-width: 120px;
+      max-width: 150px;
+      box-shadow: 0 2px 8px var(--shadow);
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .person-node:hover {
+      border-color: var(--gold);
+      box-shadow: 0 4px 16px rgba(181,134,42,0.25);
+      transform: translateY(-2px);
+    }
+    .person-node.ancestor { background: linear-gradient(135deg, #fdf0d8, #f5e0b8); border-color: var(--gold); }
+    .person-node.female { border-left: 3px solid var(--rust); }
+    .person-node .pname {
+      font-family: 'Tiro Devanagari Hindi', serif;
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: var(--ink);
+      display: block;
+    }
+    .person-node .pname-en {
+      font-size: 0.75rem;
+      color: #7a5c3a;
+      display: block;
+      font-style: italic;
+    }
+    .person-node .pyears {
+      font-size: 0.72rem;
+      color: var(--gold);
+      display: block;
+      margin-top: 0.2rem;
+    }
+    .gen-label {
+      writing-mode: vertical-rl;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: #a08060;
+      text-transform: uppercase;
+      position: absolute;
+      left: -3rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    /* ══════════════ PERSON TABLE (directory) ══════════════ */
+    .person-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    .person-table th {
+      background: var(--ink);
+      color: var(--gold-lt);
+      padding: 0.6rem 1rem;
+      text-align: left;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      font-family: 'EB Garamond', serif;
+    }
+    .person-table td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid #e8d8c0;
+      vertical-align: top;
+    }
+    .person-table tr:hover td { background: #fdf0d8; }
+    .person-table .hindi-name { font-family: 'Tiro Devanagari Hindi', serif; }
+    .person-table .gen-badge {
+      display: inline-block;
+      background: var(--rust);
+      color: white;
+      font-size: 0.72rem;
+      padding: 0.1rem 0.45rem;
+      border-radius: 20px;
+    }
+    .btn-view {
+      font-size: 0.8rem;
+      padding: 0.2rem 0.7rem;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      cursor: pointer;
+      border-radius: 2px;
+      font-family: 'EB Garamond', serif;
+      transition: all 0.2s;
+    }
+    .btn-view:hover { background: var(--gold); color: white; }
+
+    /* ══════════════ PERSON PROFILE MODAL ══════════════ */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(26,18,11,0.7);
+      backdrop-filter: blur(3px);
+      align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--cream);
+      border: 2px solid var(--border);
+      border-radius: 2px;
+      max-width: 560px; width: 100%;
+      max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      padding: 2rem;
+      position: relative;
+      animation: modalIn 0.3s ease;
+    }
+    @keyframes modalIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: var(--rust); color: white;
+      border: none; cursor: pointer;
+      width: 28px; height: 28px;
+      border-radius: 50%; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal h2 { font-size: 1.5rem; border-color: var(--border); }
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+    .profile-grid dt { color: var(--gold); font-weight: 500; }
+    .profile-grid dd { color: var(--ink); }
+
+    /* ══════════════ TIMELINE ══════════════ */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0.5rem; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(180deg, var(--gold), var(--rust), var(--sage));
+    }
+    .tl-item {
+      position: relative;
+      margin-bottom: 1.8rem;
+      padding-left: 1.2rem;
+    }
+    .tl-item::before {
+      content: '';
+      position: absolute; left: -1.55rem; top: 0.45rem;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--cream);
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .tl-year {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--rust);
+      font-weight: 700;
+    }
+    .tl-text { font-size: 0.95rem; color: #4a3828; margin-top: 0.2rem; }
+
+    /* ══════════════ SIDEBAR ══════════════ */
+    aside { position: sticky; top: 5rem; }
+    .sidebar-box {
+      background: #fff9f0;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 12px var(--shadow);
+    }
+    .sidebar-box h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--rust);
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-box ul { list-style: none; }
+    .sidebar-box ul li {
+      padding: 0.25rem 0;
+      font-size: 0.9rem;
+      border-bottom: 1px dotted #e0cca8;
+      color: #5a3e28;
+    }
+    .sidebar-box ul li::before { content: '❧ '; color: var(--gold); }
+
+    .search-box {
+      display: flex; gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 0.5rem 0.8rem;
+      border: 1px solid var(--border);
+      background: var(--cream);
+      font-family: 'EB Garamond', serif;
+      font-size: 0.95rem;
+      border-radius: 2px;
+      color: var(--ink);
+    }
+    .search-box input:focus { outline: 2px solid var(--gold-lt); }
+    .search-box button {
+      padding: 0.5rem 0.9rem;
+      background: var(--ink);
+      color: var(--gold-lt);
+      border: none; cursor: pointer;
+      border-radius: 2px;
+      font-family: 'EB Garamond', serif;
+    }
+
+    /* ══════════════ HOW TO EDIT BANNER ══════════════ */
+    .edit-banner {
+      background: linear-gradient(135deg, #1a120b, #2e1f0e);
+      color: var(--parchment);
+      border: 1px solid var(--gold);
+      border-radius: 2px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      display: flex; gap: 1.2rem; align-items: flex-start;
+    }
+    .edit-banner .icon { font-size: 2rem; flex-shrink: 0; }
+    .edit-banner h3 { color: var(--gold-lt); font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.4rem; }
+    .edit-banner p { font-size: 0.88rem; color: #c8a87a; margin: 0; line-height: 1.5; }
+    .edit-banner code {
+      background: rgba(181,134,42,0.2);
+      padding: 0.1rem 0.4rem;
+      border-radius: 2px;
+      font-size: 0.82rem;
+      color: var(--gold-lt);
+    }
+
+    /* ══════════════ FOOTER ══════════════ */
+    footer {
+      background: var(--ink);
+      color: #a08060;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+      font-size: 0.88rem;
+      letter-spacing: 0.05em;
+      border-top: 3px solid var(--gold);
+    }
+    footer .footer-title {
+      font-family: 'Tiro Devanagari Hindi', serif;
+      font-size: 1.4rem;
+      color: var(--gold-lt);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    /* ══════════════ RESPONSIVE ══════════════ */
+    @media (max-width: 600px) {
+      .hero-intro { grid-template-columns: 1fr; text-align: center; }
+      .profile-grid { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: repeat(2,1fr); }
+      header { padding: 2rem 1rem 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header>
+  <div class="header-ornament">✦ ✦ ✦</div>
+  <h1>वंशावली</h1>
+  <div class="subtitle">Vanshaavali — The Living Chronicle of Our Ancestors</div>
+  <div class="header-meta">🏡 [अपने गाँव का नाम यहाँ लिखें — Your Village Name Here] &nbsp;|&nbsp; Est. [Year]</div>
+</header>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <ul>
+    <li><a href="#" class="active" onclick="showSection('home',this)">🏠 Home</a></li>
+    <li><a href="#" onclick="showSection('history',this)">📜 Village History</a></li>
+    <li><a href="#" onclick="showSection('tree',this)">🌳 Family Tree</a></li>
+    <li><a href="#" onclick="showSection('directory',this)">👥 Members</a></li>
+    <li><a href="#" onclick="showSection('gotra',this)">🔱 Gotra / Kul</a></li>
+    <li><a href="#" onclick="showSection('howto',this)">✏️ How to Edit</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<div class="page-wrap">
+<main>
+
+  <!-- ── HOME ── -->
+  <section class="section active" id="home">
+    <div class="hero-intro">
+      <div class="hero-icon">🕌</div>
+      <div>
+        <h2>Welcome to Our Vanshaavali <span class="hindi">वंशावली</span></h2>
+        <p>This is the living digital record of our village's families, ancestors, and history — spanning many generations. Explore the family trees, read our village's origin story, and find your place in our shared heritage.</p>
+      </div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat-box"><span class="num" id="stat-members">…</span><span class="lbl">Members</span></div>
+      <div class="stat-box"><span class="num" id="stat-generations">…</span><span class="lbl">Generations</span></div>
+      <div class="stat-box"><span class="num">18–63</span><span class="lbl">Source Pages</span></div>
+      <div class="stat-box"><span class="num">सांकृति</span><span class="lbl">गोत्र / Gotra</span></div>
+    </div>
+
+    <div class="card">
+      <h2>About This Vanshaavali <span class="hindi">परिचय</span></h2>
+      <p>This document preserves the genealogical history of the families of <strong>बसुका (Basuka)</strong> village. It is transcribed in full from the printed <strong>सकरवार वंशावली (Sakarwar Vanshaavali)</strong>, pages 18 to 63, covering the mythological Rishi lineage down through <strong>पुरनमल राय</strong> and <strong>रतन देव राय</strong>, and branching into the <strong>राजशाह (पूरब पट्टी)</strong> and <strong>भोजशाह (पश्चिम पट्टी)</strong> lines of Basuka's भूमिहार families, as well as the सकरवार पठान branch.</p>
+      <h3>How to Use This Site</h3>
+      <p>Use the <strong>Family Tree</strong> tab to visualize generational connections. The <strong>Members</strong> tab lets you search any of the 1,500+ recorded individuals by name, ID, generation, or branch — click "View" to see a person's full ancestor chain and children. <strong>Village History</strong> holds the origin story.</p>
+    </div>
+  </section>
+
+  <!-- ── HISTORY ── -->
+  <section class="section" id="history">
+    <div class="card">
+      <h2>Village History <span class="hindi">ग्राम इतिहास</span></h2>
+      <p>Replace this text with your village's actual history. This section should describe the origin of your village, who founded it, which families first settled here, from where they migrated, and the major events that shaped the community over the centuries.</p>
+
+      <h3>Origin & Migration / उत्पत्ति</h3>
+      <p>According to the Vanshaavali, the earliest ancestors of <strong>[Village Name]</strong> are believed to have come from <strong>[place of origin]</strong> around <strong>[century/year]</strong>. The founding family was that of <strong>[Ancestor Name]</strong>, who settled here after <strong>[reason — drought/war/trade/pilgrimage etc.]</strong>.</p>
+
+      <h3>Notable Places / महत्वपूर्ण स्थान</h3>
+      <p>Add information about the temple, well, cremation ground, landmark tree, or other locations that are historically significant to your village.</p>
+    </div>
+
+    <div class="card">
+      <h2>Historical Timeline <span class="hindi">कालक्रम</span></h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-year">~1650 CE</div>
+          <div class="tl-text">Founding ancestor <strong>[Name]</strong> settles in this region after migrating from <strong>[place]</strong>. Builds first dwelling near the river bank.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">~1720 CE</div>
+          <div class="tl-text">Second generation expands. Three family branches established. The village temple of <strong>[deity name]</strong> is constructed.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">~1800 CE</div>
+          <div class="tl-text">Community grows to <strong>[X]</strong> households. Land records show significant agricultural expansion. New families join the village.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1857</div>
+          <div class="tl-text">During the First War of Independence, <strong>[Name]</strong> from this village participated in <strong>[event]</strong>. Add your village's specific history here.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1947</div>
+          <div class="tl-text">Independence of India. Village reorganized under new administrative system. <strong>[Name]</strong> becomes first elected Pradhan / village head.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">Present</div>
+          <div class="tl-text">The Vanshaavali is digitalized and made available online for all community members and future generations.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAMILY TREE ── -->
+  <section class="section" id="tree">
+    <div class="card">
+      <h2>Family Tree <span class="hindi">वंश वृक्ष</span></h2>
+      <p>This shows a <strong>sample family tree</strong>. Replace names with your actual ancestors. Each box is clickable. Add as many generations as needed by duplicating the <code>.tree-gen</code> rows in the HTML.</p>
+
+      <div class="tree-container">
+        <div class="tree">
+
+          <!-- Gen 1 -->
+          <div class="tree-gen" style="position:relative">
+            <span class="gen-label">पीढ़ी १</span>
+            <div class="person-node ancestor" onclick="openProfile('p1')">
+              <span class="pname">मूल पूर्वज</span>
+              <span class="pname-en">Mool Poorvaj</span>
+              <span class="pyears">~1650</span>
+            </div>
+          </div>
+
+          <!-- Gen 2 -->
+          <div class="tree-gen">
+            <span class="gen-label">पीढ़ी २</span>
+            <div class="person-node" onclick="openProfile('p2')">
+              <span class="pname">पुत्र १ का नाम</span>
+              <span class="pname-en">First Son</span>
+              <span class="pyears">~1680</span>
+            </div>
+            <div class="person-node" onclick="openProfile('p3')">
+              <span class="pname">पुत्र २ का नाम</span>
+              <span class="pname-en">Second Son</span>
+              <span class="pyears">~1685</span>
+            </div>
+          </div>
+
+          <!-- Gen 3 -->
+          <div class="tree-gen">
+            <span class="gen-label">पीढ़ी ३</span>
+            <div class="person-node" onclick="openProfile('p4')">
+              <span class="pname">नाम</span>
+              <span class="pname-en">Name</span>
+              <span class="pyears">~1710</span>
+            </div>
+            <div class="person-node" onclick="openProfile('p5')">
+              <span class="pname">नाम</span>
+              <span class="pname-en">Name</span>
+              <span class="pyears">~1715</span>
+            </div>
+            <div class="person-node" onclick="openProfile('p6')">
+              <span class="pname">नाम</span>
+              <span class="pname-en">Name</span>
+              <span class="pyears">~1718</span>
+            </div>
+            <div class="person-node" onclick="openProfile('p7')">
+              <span class="pname">नाम</span>
+              <span class="pname-en">Name</span>
+              <span class="pyears">~1720</span>
+            </div>
+          </div>
+
+          <!-- Gen 4 sample -->
+          <div class="tree-gen">
+            <span class="gen-label">पीढ़ी ४</span>
+            <div class="person-node" onclick="openProfile('p8')"><span class="pname">नाम</span><span class="pname-en">Name</span><span class="pyears">~1745</span></div>
+            <div class="person-node" onclick="openProfile('p9')"><span class="pname">नाम</span><span class="pname-en">Name</span><span class="pyears">~1748</span></div>
+            <div class="person-node" onclick="openProfile('p10')"><span class="pname">नाम</span><span class="pname-en">Name</span><span class="pyears">~1750</span></div>
+            <div class="person-node" onclick="openProfile('p11')"><span class="pname">नाम</span><span class="pname-en">Name</span><span class="pyears">~1752</span></div>
+            <div class="person-node" onclick="openProfile('p12')"><span class="pname">नाम</span><span class="pname-en">Name</span><span class="pyears">~1755</span></div>
+          </div>
+
+        </div>
+      </div>
+
+      <p style="margin-top:1.5rem; font-size:0.88rem; color:#7a5c3a;">
+        💡 <strong>Tip:</strong> For very large trees with 100+ members, use free tools like
+        <a href="https://www.familyecho.com" target="_blank" style="color:var(--gold)">Family Echo</a> or
+        <a href="https://gramps-project.org" target="_blank" style="color:var(--gold)">Gramps</a> to export and embed an interactive SVG/HTML tree.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── DIRECTORY ── -->
+  <section class="section" id="directory">
+    <div class="card">
+      <h2>Members Directory <span class="hindi">सदस्य सूची</span></h2>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search by name, branch, generation, ID…" oninput="filterTable()"/>
+        <button onclick="filterTable()">🔍</button>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="person-table" id="memberTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>नाम / Name</th>
+              <th>पिता / Father</th>
+              <th>शाखा / Branch</th>
+              <th>प.नं. / Page</th>
+              <th>पीढ़ी / Gen</th>
+              <th>Profile</th>
+            </tr>
+          </thead>
+          <tbody id="memberTableBody">
+            <!-- Rows are injected by JS below -->
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:1rem;font-size:0.85rem;color:#7a5c3a;">
+        📝 <strong>To add or correct a member:</strong> edit <code>data/basuka_vanshaavali.json</code>, or open the master Excel file and re-export.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── GOTRA ── -->
+  <section class="section" id="gotra">
+    <div class="card">
+      <h2>Gotra & Kul <span class="hindi">गोत्र एवं कुल</span></h2>
+      <p>Gotra is the patrilineal lineage traced back to a Vedic sage (Rishi). Every Hindu family belongs to one gotra. Marriage within the same gotra is traditionally prohibited (sapinda relationship).</p>
+
+      <h3>Gotras in Our Village</h3>
+      <table class="person-table" style="margin-top:0.5rem;">
+        <thead>
+          <tr>
+            <th>Gotra / गोत्र</th>
+            <th>Mool Rishi / मूल ऋषि</th>
+            <th>Families / परिवार</th>
+            <th>Pravara</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="hindi-name">कश्यप</td><td>Kashyap</td><td>3 families</td><td>Kashyapa, Avatsara, Naidhruva</td></tr>
+          <tr><td class="hindi-name">भारद्वाज</td><td>Bharadwaj</td><td>2 families</td><td>Angiras, Barhaspatya, Bharadwaja</td></tr>
+          <tr><td class="hindi-name">वशिष्ठ</td><td>Vasishtha</td><td>2 families</td><td>Vasishtha, Indrapramada, Abharadasa</td></tr>
+          <tr><td class="hindi-name">गौतम</td><td>Gautam</td><td>2 families</td><td>Angirasa, Ayasya, Gautama</td></tr>
+          <tr><td class="hindi-name">अत्रि</td><td>Atri</td><td>1 family</td><td>Atreya, Archananas, Shyavashva</td></tr>
+          <tr><td colspan="4" style="font-size:0.85rem;color:#7a5c3a;font-style:italic;">→ Add your village's actual gotras here</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Kul Devta / Kuldevi <span style="font-family:'Tiro Devanagari Hindi';font-size:1rem;"> कुलदेवी</span></h3>
+      <p>The family deity (Kul Devta / Kuldevi) worshipped by each family lineage. Add your family's Kul Devta and the temple location here.</p>
+      <ul style="list-style:none;font-size:0.95rem;">
+        <li style="padding:0.3rem 0;border-bottom:1px dotted #e0cca8;">🔱 <strong>[Family 1]</strong> — Kuldevi: [Devi Name], Temple at [location]</li>
+        <li style="padding:0.3rem 0;border-bottom:1px dotted #e0cca8;">🔱 <strong>[Family 2]</strong> — Kuldevi: [Devi Name], Temple at [location]</li>
+        <li style="padding:0.3rem 0;">🔱 <strong>[Family 3]</strong> — Kuldevi: [Devi Name], Temple at [location]</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── HOW TO EDIT ── -->
+  <section class="section" id="howto">
+    <div class="edit-banner">
+      <div class="icon">⚙️</div>
+      <div>
+        <h3>This website is fully editable by you!</h3>
+        <p>All data is stored directly in this <code>index.html</code> file. Open it in any text editor (VS Code recommended) and follow the guide below to add your real family data.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Step-by-Step Editing Guide</h2>
+
+      <h3>1. Correct or Add a Person</h3>
+      <p>All 1,583 records live in <code>data/basuka_vanshaavali.json</code>, not in this HTML file. Open that file in VS Code and find the person by <code>"nameHi"</code> or <code>"id"</code>. Each entry looks like this:</p>
+      <pre style="background:#1a120b;color:#d4b896;padding:1rem;border-radius:2px;font-size:0.85rem;overflow-x:auto;margin:0.5rem 0;">{ "id": "P1508", "nameHi": "रामदवर राय", "nameEn": "Ramdavar Rai",
+  "fatherId": "P1505", "childrenIds": ["P1513","P1514","P1515","P1516"],
+  "generation": 61, "branch": "राजशाह वंश — पूरब पट्टी (Raj Shah / Poorab Patti)",
+  "lineEnds": false, "page": "61", "notes": "" }</pre>
+      <p>To add a new person: give them a new unique <code>id</code> (e.g. <code>"P1584"</code>), set their <code>fatherId</code> to an existing person's id, and add their new id into that father's <code>childrenIds</code> list. Save the file — the website re-reads it automatically on refresh.</p>
+
+      <h3>2. Edit Village History</h3>
+      <p>Find <code>&lt;section id="history"&gt;</code> in <code>index.html</code> and replace the placeholder text with your actual village history.</p>
+
+      <h3>3. Fix a Reading from the Original Book</h3>
+      <p>The master Excel file (<code>Basuka_Vanshaavali_MASTER.xlsx</code>) has the same data in spreadsheet form with a "Legend & Notes" tab listing a few ambiguous readings still open for review. Once you confirm a correction there, mirror the change in <code>data/basuka_vanshaavali.json</code>.</p>
+
+      <h3>4. See Your Changes Locally Before Pushing</h3>
+      <p>Because this page loads <code>data/basuka_vanshaavali.json</code> with <code>fetch()</code>, opening <code>index.html</code> by double-clicking it won't work (browsers block local file fetches). In VS Code, install the <strong>Live Server</strong> extension, right-click <code>index.html</code>, and choose <strong>"Open with Live Server."</strong></p>
+
+      <h3>5. Publish to GitHub Pages</h3>
+      <p>Your repository is <a href="https://github.com/ar2623441-oss/my-village-BASUKA-vanshaavali" target="_blank" style="color:var(--gold)">ar2623441-oss/my-village-BASUKA-vanshaavali</a>. Once <code>index.html</code> and the <code>data/</code> folder are pushed to the <code>main</code> branch, go to <strong>Settings → Pages</strong>, set <strong>Source: Deploy from a branch</strong>, branch <strong>main</strong>, folder <strong>/ (root)</strong>, and save. The site will be live at:</p>
+      <p style="font-family:monospace;background:#fdf0d8;padding:0.6rem 1rem;border-radius:2px;">https://ar2623441-oss.github.io/my-village-BASUKA-vanshaavali/</p>
+
+      <h3>6. Add Photos</h3>
+      <p>Create a <code>photos/</code> folder in the repo, upload images there, and reference them from a person's profile by extending that person's JSON entry, e.g. <code>"photo": "photos/name.jpg"</code>.</p>
+
+      <h3>7. Custom Domain (Optional, ~₹500/year)</h3>
+      <p>Buy a domain like <code>basuka-vanshavali.in</code>, then point it to your GitHub Pages site under <strong>Settings → Pages → Custom domain</strong>.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<aside>
+  <div class="sidebar-box">
+    <h4>🔱 Quick Navigation</h4>
+    <ul>
+      <li onclick="showSection('home',null)" style="cursor:pointer;">Home / परिचय</li>
+      <li onclick="showSection('history',null)" style="cursor:pointer;">Village History</li>
+      <li onclick="showSection('tree',null)" style="cursor:pointer;">Family Tree</li>
+      <li onclick="showSection('directory',null)" style="cursor:pointer;">Members Directory</li>
+      <li onclick="showSection('gotra',null)" style="cursor:pointer;">Gotra & Kul</li>
+    </ul>
+  </div>
+
+  <div class="sidebar-box">
+    <h4>📋 Village Info</h4>
+    <ul>
+      <li><strong>Village:</strong> [नाम]</li>
+      <li><strong>District:</strong> [जिला]</li>
+      <li><strong>State:</strong> [राज्य]</li>
+      <li><strong>Tehsil:</strong> [तहसील]</li>
+      <li><strong>Pin Code:</strong> [000000]</li>
+    </ul>
+  </div>
+
+  <div class="sidebar-box">
+    <h4>🕐 Last Updated</h4>
+    <p style="font-size:0.88rem;color:#5a3e28;" id="lastUpdated">Loading…</p>
+  </div>
+
+  <div class="sidebar-box">
+    <h4>📞 Contact / संपर्क</h4>
+    <p style="font-size:0.88rem;color:#5a3e28;">To contribute information or correct records, contact:<br><strong>[Name of maintainer]</strong><br>[Email or phone]</p>
+  </div>
+</aside>
+</div>
+
+<!-- ═══════════ PERSON PROFILE MODAL ═══════════ -->
+<div class="modal-overlay" id="profileModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeProfile()">✕</button>
+    <h2 id="modal-name">—</h2>
+    <div class="profile-grid" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <span class="footer-title">वंशावली</span>
+  Preserving the memory of our ancestors for the generations yet to come.<br>
+  <span style="color:#6a4e2a;font-size:0.8rem;margin-top:0.5rem;display:block;">
+    Built with ❤️ using free tools | Hosted on GitHub Pages
+  </span>
+</footer>
+
+<!-- ═══════════ SCRIPTS ═══════════ -->
+<script>
+// ══════════════════════════════════════════════
+// MEMBERS DATA — loaded from data/basuka_vanshaavali.json
+// (generated from the printed Sakarwar Vanshaavali book, pages 18-63)
+// ══════════════════════════════════════════════
+let MEMBERS = [];
+let MEMBERS_BY_ID = {};
+
+async function loadData() {
+  const res = await fetch('data/basuka_vanshaavali.json');
+  const json = await res.json();
+  MEMBERS = json.people.map(p => ({
+    id: p.id,
+    name: p.nameHi,
+    nameEn: p.nameEn,
+    fatherId: p.fatherId,
+    father: p.fatherId ? '' : '—',   // filled in below once the index exists
+    gen: p.generation,
+    branch: p.branch,
+    childrenIds: p.childrenIds,
+    children: '',                     // filled in below
+    lineEnds: p.lineEnds,
+    page: p.page,
+    notes: p.notes || ''
+  }));
+  MEMBERS_BY_ID = Object.fromEntries(MEMBERS.map(m => [m.id, m]));
+  MEMBERS.forEach(m => {
+    m.father = m.fatherId ? (MEMBERS_BY_ID[m.fatherId]?.name || m.fatherId) : '—';
+    m.children = m.childrenIds.map(cid => MEMBERS_BY_ID[cid]?.name || cid).join(', ');
+  });
+  return json.meta;
+}
+
+// ══════════════════════════════════════════════
+// NAV: Show/hide sections
+// ══════════════════════════════════════════════
+function showSection(id, linkEl) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (linkEl) linkEl.classList.add('active');
+}
+
+// ══════════════════════════════════════════════
+// MEMBER TABLE: Render + Filter
+// ══════════════════════════════════════════════
+function renderTable(data) {
+  const tbody = document.getElementById('memberTableBody');
+  const MAX_ROWS = 500; // keep the DOM light; search narrows this down
+  const shown = data.slice(0, MAX_ROWS);
+  tbody.innerHTML = shown.map(m => `
+    <tr>
+      <td style="color:var(--gold);font-size:0.8rem;">${m.id}</td>
+      <td>
+        <span class="hindi-name" style="font-size:1rem;">${m.name}</span>${m.lineEnds ? ' <span title="निर्वंश — no further descendants" style="color:var(--rust);">×</span>' : ''}<br>
+        <span style="font-size:0.8rem;color:#7a5c3a;font-style:italic;">${m.nameEn}</span>
+      </td>
+      <td class="hindi-name">${m.father}</td>
+      <td class="hindi-name" style="font-size:0.82rem;">${m.branch}</td>
+      <td>${m.page}</td>
+      <td><span class="gen-badge">Gen ${m.gen}</span></td>
+      <td><button class="btn-view" onclick="openProfile('${m.id}')">View</button></td>
+    </tr>
+  `).join('') + (data.length > MAX_ROWS
+      ? `<tr><td colspan="7" style="text-align:center;font-style:italic;color:#7a5c3a;padding:0.8rem;">
+           …${data.length - MAX_ROWS} more matches. Keep typing to narrow the search further.</td></tr>`
+      : '');
+}
+
+function filterTable() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  if (!q) { renderTable(MEMBERS); return; }
+  const filtered = MEMBERS.filter(m =>
+    m.name.toLowerCase().includes(q) ||
+    m.nameEn.toLowerCase().includes(q) ||
+    m.branch.toLowerCase().includes(q) ||
+    m.father.toLowerCase().includes(q) ||
+    m.id.toLowerCase().includes(q) ||
+    String(m.gen).includes(q)
+  );
+  renderTable(filtered);
+}
+
+// ══════════════════════════════════════════════
+// PROFILE MODAL
+// ══════════════════════════════════════════════
+function ancestorPath(id) {
+  const chain = [];
+  let cur = MEMBERS_BY_ID[id];
+  while (cur) {
+    chain.unshift(cur);
+    cur = cur.fatherId ? MEMBERS_BY_ID[cur.fatherId] : null;
+  }
+  return chain.map(m =>
+    `<a href="#" onclick="openProfile('${m.id}');return false;" style="color:var(--rust);text-decoration:none;border-bottom:1px dotted var(--rust);">${m.name}</a>`
+  ).join(' → ');
+}
+
+function openProfile(id) {
+  const p = MEMBERS_BY_ID[id];
+  if (!p) return;
+  const childLinks = p.childrenIds.length
+    ? p.childrenIds.map(cid => {
+        const c = MEMBERS_BY_ID[cid];
+        return c ? `<a href="#" onclick="openProfile('${c.id}');return false;" style="color:var(--sage);text-decoration:none;border-bottom:1px dotted var(--sage);">${c.name}</a>` : cid;
+      }).join(', ')
+    : '—';
+  document.getElementById('modal-name').innerHTML =
+    `<span style="font-family:'Tiro Devanagari Hindi',serif">${p.name}</span>
+     <small style="font-family:'EB Garamond',serif;font-style:italic;color:#7a5c3a;font-size:0.7em;margin-left:0.5rem">${p.nameEn}</small>`;
+  document.getElementById('modal-body').innerHTML = `
+    <dt>ID</dt>                <dd>${p.id}</dd>
+    <dt>पिता / Father</dt>     <dd>${p.fatherId ? `<a href="#" onclick="openProfile('${p.fatherId}');return false;" style="color:var(--rust);">${p.father}</a>` : '—'}</dd>
+    <dt>शाखा / Branch</dt>     <dd>${p.branch}</dd>
+    <dt>पुस्तक पृष्ठ / Book Page</dt><dd>${p.page}</dd>
+    <dt>पीढ़ी / Generation</dt><dd>${p.gen}</dd>
+    <dt>निर्वंश / Line Ends</dt><dd>${p.lineEnds ? '× (कोई सन्तान नहीं / no descendants)' : 'नहीं / no'}</dd>
+    <dt>संतान / Children</dt>  <dd>${childLinks}</dd>
+    <dt colspan="2">वंश-श्रृंखला / Ancestor Chain</dt>
+    <dd colspan="2" style="grid-column:span 2;font-size:0.9rem;">${ancestorPath(id)}</dd>
+    ${p.notes ? `<dt colspan="2">विवरण / Notes</dt>
+    <dd colspan="2" style="grid-column:span 2;background:#fdf0d8;padding:0.5rem;border-radius:2px;font-style:italic;">${p.notes}</dd>` : ''}
+  `;
+  document.getElementById('profileModal').classList.add('open');
+}
+
+function closeProfile() {
+  document.getElementById('profileModal').classList.remove('open');
+}
+document.getElementById('profileModal').addEventListener('click', function(e) {
+  if (e.target === this) closeProfile();
+});
+
+// ══════════════════════════════════════════════
+// STATS & INIT
+// ══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', async () => {
+  const tbody = document.getElementById('memberTableBody');
+  tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:1.5rem;font-style:italic;color:#7a5c3a;">Loading vanshaavali data…</td></tr>`;
+  try {
+    const meta = await loadData();
+    renderTable(MEMBERS);
+    document.getElementById('stat-members').textContent = MEMBERS.length;
+    if (document.getElementById('stat-generations')) {
+      document.getElementById('stat-generations').textContent = meta.maxGeneration;
+    }
+  } catch (err) {
+    tbody.innerHTML = `<tr><td colspan="7" style="color:var(--rust);text-align:center;padding:1.5rem;">
+      Could not load data/basuka_vanshaavali.json — ${err.message}.
+      If you're opening this file directly from disk, run a local server instead (see the How-To-Edit section).</td></tr>`;
+  }
+  document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('hi-IN', {
+    year:'numeric', month:'long', day:'numeric'
+  });
+});
+</script>
+</body>
+</html>
