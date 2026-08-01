@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+ 
+Sitemap: https://ar2623441-oss.github.io/my-village-BASUKA-vanshaavali/sitemap.xml
