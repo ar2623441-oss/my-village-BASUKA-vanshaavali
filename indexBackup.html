@@ -4,14 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>बसुका वंशावली — Basuka Vanshaavali | Sakarwar Vanshaavali</title>
-  <meta name="google-site-verification" content="XAwXuKnrPpeZtLdZ6HBqNw_lgchjqjfSH0cWfjuH9io" />
   <meta name="description" content="बसुका गाँव (गाजीपुर, उत्तर प्रदेश) की डिजिटल वंशावली — 1500+ सदस्य, 45 पीढ़ियाँ। Digital family tree and genealogy of Basuka village, Ghazipur, UP — Sakarwar lineage, Raj Shah & Bhoj Shah branches, Sankriti Rishi gotra.">
   <meta name="keywords" content="Basuka, बसुका, Sakarwar Vanshaavali, सकरवार वंशावली, Ghazipur genealogy, Sankriti gotra, Bhumihar Brahmin family tree">
+  <meta name="google-site-verification" content="ozsxF4ekb4eLfoTrxnmRx0Xx1P78F2sR0Oxn6nCrqK8" />
   <link rel="canonical" href="https://ar2623441-oss.github.io/my-village-BASUKA-vanshaavali/">
+
+  <!-- Social share preview (WhatsApp, Facebook, etc.) -->
   <meta property="og:title" content="बसुका वंशावली — Basuka Vanshaavali">
   <meta property="og:description" content="बसुका गाँव की डिजिटल वंशावली — 1500+ सदस्य, 45 पीढ़ियाँ। Digital genealogy of Basuka village, Ghazipur.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ar2623441-oss.github.io/my-village-BASUKA-vanshaavali/">
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Tiro+Devanagari+Hindi:ital@0;1&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -536,56 +539,6 @@
       .stats-bar { grid-template-columns: repeat(2,1fr); }
       header { padding: 2rem 1rem 1.8rem; }
     }
-    /* ══ VISUAL TREE TAB ══ */
-    #vtContainer {
-      width: 100%; height: 72vh; min-height: 420px;
-      border: 1.5px solid var(--border); border-radius: 6px;
-      background:
-        radial-gradient(ellipse 80% 60% at 30% 20%, rgba(226,166,60,0.08) 0%, transparent 60%),
-        var(--cream);
-      overflow: hidden; position: relative; cursor: grab;
-      box-shadow: inset 0 2px 10px rgba(43,15,15,0.08);
-    }
-    #vtContainer:active { cursor: grabbing; }
-    #vtSvg { display: block; }
-    .vt-link {
-      fill: none; stroke: #d9b676; stroke-width: 1.6px; stroke-opacity: 0.6;
-      transition: stroke 0.25s, stroke-width 0.25s, stroke-opacity 0.25s;
-    }
-    .vt-link.vt-hl { stroke: var(--rust); stroke-width: 3px; stroke-opacity: 0.95; }
-    .vt-node circle {
-      stroke: #fff; stroke-width: 1.6px; cursor: pointer;
-      transition: stroke 0.25s, stroke-width 0.25s, filter 0.25s;
-      filter: drop-shadow(0 1px 3px rgba(43,15,15,0.25));
-    }
-    .vt-node:hover circle { stroke: var(--ink); stroke-width: 2.5px; }
-    .vt-node.vt-hl circle { stroke: var(--rust); stroke-width: 3px; filter: drop-shadow(0 0 6px rgba(193,57,43,0.6)); }
-    .vt-node.vt-selected circle { stroke: var(--ink); stroke-width: 3.5px; }
-    .vt-node text {
-      font-family: 'Tiro Devanagari Hindi', serif; fill: var(--ink);
-      pointer-events: none; text-anchor: middle; font-size: 10px;
-    }
-    .vt-node.vt-hl text { font-weight: bold; fill: var(--rust); }
-    .vt-controls {
-      position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; gap: 6px; z-index: 5;
-    }
-    .vt-controls button {
-      width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--border);
-      background: var(--cream); color: var(--ink); font-size: 1rem; cursor: pointer;
-      box-shadow: 0 2px 8px var(--shadow);
-    }
-    .vt-controls button:hover { background: var(--gold-lt); }
-    .vt-legend {
-      display: flex; flex-wrap: wrap; gap: 0.9rem; font-size: 0.8rem; margin: 0.8rem 0; color: var(--ink);
-    }
-    .vt-legend span.sw { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; }
-    .vt-info-box {
-      position: absolute; bottom: 10px; left: 10px; max-width: 320px;
-      background: var(--cream); border: 1.5px solid var(--gold); border-radius: 6px;
-      padding: 0.7rem 1rem; box-shadow: 0 4px 16px var(--shadow); font-size: 0.85rem; z-index: 5; display: none;
-    }
-    .vt-info-box.show { display: block; }
-    .vt-info-box .close { float: right; cursor: pointer; color: var(--rust); font-weight: bold; }
   </style>
 </head>
 <body>
@@ -604,7 +557,6 @@
     <li><a href="#" class="active" onclick="showSection('home',this)">🏠 Home</a></li>
     <li><a href="#" onclick="showSection('history',this)">📜 Village History</a></li>
     <li><a href="#" onclick="showSection('tree',this)">🌳 Family Tree</a></li>
-    <li><a href="#" onclick="showSection('visualtree',this)">🌐 Visual Tree</a></li>
     <li><a href="#" onclick="showSection('directory',this)">👥 Members</a></li>
     <li><a href="#" onclick="showSection('gotra',this)">🔱 Gotra</a></li>
   </ul>
@@ -818,42 +770,6 @@
     </div>
   </section>
 
-  <!-- ── VISUAL TREE ── -->
-  <section class="section" id="visualtree">
-    <div class="card">
-      <h2>Visual Family Tree <span class="hindi">चित्रमय वंश वृक्ष</span></h2>
-      <p>The complete 1,583-person vanshaavali as one connected graph, loaded in full below. It opens zoomed out so you can see the whole shape of the tree; scroll or pinch to zoom in, drag to pan around. Search for a name to jump straight to that person and highlight their entire line of ancestors back to ओंकार.</p>
-
-      <div class="search-box">
-        <input type="text" id="vtSearchInput" placeholder="नाम खोजें और वृक्ष पर देखें / Search a name to locate them on the tree…" oninput="vtSearch()"/>
-      </div>
-      <div id="vtSearchResults" style="margin:0.5rem 0;"></div>
-
-      <div class="vt-legend">
-        <span><span class="sw" style="background:#c1392b;"></span>राजशाह / Raj Shah</span>
-        <span><span class="sw" style="background:#e2a63c;"></span>भोजशाह / Bhoj Shah</span>
-        <span><span class="sw" style="background:#2e7d5b;"></span>विक्रमशाह / Vikram Shah</span>
-        <span><span class="sw" style="background:#2f6690;"></span>सकरवार पठान / Sakarwar Pathan</span>
-        <span><span class="sw" style="background:#6b3410;"></span>मूल वंश / Root Lineage</span>
-        <span><span class="sw" style="background:#8a4a12;"></span>अन्य शाखाएँ / Other Branches</span>
-      </div>
-
-      <div id="vtContainer">
-        <svg id="vtSvg"></svg>
-        <div class="vt-controls">
-          <button onclick="vtZoomBy(1.3)" title="Zoom in">＋</button>
-          <button onclick="vtZoomBy(0.7)" title="Zoom out">－</button>
-          <button onclick="vtZoomReset()" title="Fit whole tree">⤢</button>
-        </div>
-        <div class="vt-info-box" id="vtInfoBox"></div>
-      </div>
-
-      <p style="margin-top:1rem; font-size:0.88rem; color:#a8481c;">
-        💡 <strong>Tip:</strong> Click any person on the graph to highlight their full ancestor chain in red. Names are tiny at the default zoomed-out view by design — this is 45 generations at once — zoom in on any area to read them clearly.
-      </p>
-    </div>
-  </section>
-
   <!-- ── DIRECTORY ── -->
   <section class="section" id="directory">
     <div class="card">
@@ -1038,7 +954,6 @@
 </footer>
 
 <!-- ═══════════ SCRIPTS ═══════════ -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
 // ══════════════════════════════════════════════
 // MEMBERS DATA — loaded from data/basuka_vanshaavali.json
@@ -1227,170 +1142,6 @@ function searchTreeRoot() {
 // ══════════════════════════════════════════════
 // STATS & INIT
 // ══════════════════════════════════════════════
-// ══════════════════════════════════════════════
-// VISUAL TREE (D3 — full 1,583-person graph)
-// ══════════════════════════════════════════════
-let vt = { svg:null, g:null, zoom:null, nodeEls:{}, linkEls:{}, width:0, height:0, root:null, built:false };
-
-function vtColor(branch) {
-  if (!branch) return '#8a4a12';
-  if (branch.includes('राजशाह')) return '#c1392b';
-  if (branch.includes('भोजशाह')) return '#e2a63c';
-  if (branch.includes('विक्रमशाह')) return '#2e7d5b';
-  if (branch.includes('पठान')) return '#2f6690';
-  if (branch.includes('मूल वंश')) return '#6b3410';
-  return '#8a4a12';
-}
-
-function vtBuildTree() {
-  if (vt.built || !MEMBERS.length) return;
-  const container = document.getElementById('vtContainer');
-  vt.width = container.clientWidth || 900;
-  vt.height = container.clientHeight || 500;
-
-  const svg = d3.select('#vtSvg').attr('width', vt.width).attr('height', vt.height);
-  const g = svg.append('g').attr('class', 'vt-g');
-  vt.svg = svg; vt.g = g;
-
-  // Build hierarchy from flat MEMBERS list (id / fatherId already present)
-  const stratifyData = MEMBERS.map(m => ({ id: m.id, parentId: m.fatherId || null, data: m }));
-  const root = d3.stratify().id(d => d.id).parentId(d => d.parentId)(stratifyData);
-  vt.root = root;
-
-  const dx = 26, dy = 130;
-  const treeLayout = d3.tree().nodeSize([dx, dy]);
-  treeLayout(root);
-
-  // links
-  const linkGen = d3.linkVertical().x(d => d.x).y(d => d.y);
-  g.append('g').attr('class', 'vt-links').selectAll('path')
-    .data(root.links())
-    .join('path')
-    .attr('class', 'vt-link')
-    .attr('id', d => 'vtlink-' + d.target.id)
-    .attr('d', linkGen)
-    .each(function(d) { vt.linkEls[d.target.id] = d3.select(this); });
-
-  // nodes
-  const nodeG = g.append('g').attr('class', 'vt-nodes').selectAll('g')
-    .data(root.descendants())
-    .join('g')
-    .attr('class', 'vt-node')
-    .attr('id', d => 'vtnode-' + d.id)
-    .attr('transform', d => `translate(${d.x},${d.y})`)
-    .on('click', (event, d) => { event.stopPropagation(); vtSelectPerson(d.id, false); });
-
-  nodeG.append('circle')
-    .attr('r', d => d.depth === 0 ? 10 : Math.max(4, 7 - d.depth * 0.05))
-    .attr('fill', d => vtColor(d.data.data.branch));
-
-  nodeG.append('text')
-    .attr('y', d => (d.depth === 0 ? 22 : 16))
-    .text(d => d.data.data.name);
-
-  root.descendants().forEach(d => { vt.nodeEls[d.id] = nodeG.filter(n => n.id === d.id); });
-
-  // zoom/pan
-  vt.zoom = d3.zoom().scaleExtent([0.02, 4]).on('zoom', (event) => {
-    g.attr('transform', event.transform);
-  });
-  svg.call(vt.zoom);
-
-  vt.built = true;
-  vtZoomReset();
-}
-
-function vtFitTransform() {
-  const bounds = vt.g.node().getBBox();
-  const fullWidth = vt.width, fullHeight = vt.height;
-  const w = bounds.width, h = bounds.height;
-  if (w === 0 || h === 0) return d3.zoomIdentity;
-  const scale = 0.9 / Math.max(w / fullWidth, h / fullHeight);
-  const tx = fullWidth / 2 - (bounds.x + w / 2) * scale;
-  const ty = 30 - bounds.y * scale;
-  return d3.zoomIdentity.translate(tx, ty).scale(scale);
-}
-
-function vtZoomReset() {
-  if (!vt.built) return;
-  vt.svg.transition().duration(600).call(vt.zoom.transform, vtFitTransform());
-  vtClearHighlight();
-  document.getElementById('vtInfoBox').classList.remove('show');
-}
-
-function vtZoomBy(factor) {
-  if (!vt.built) return;
-  vt.svg.transition().duration(300).call(vt.zoom.scaleBy, factor);
-}
-
-function vtClearHighlight() {
-  Object.values(vt.nodeEls).forEach(el => el.classed('vt-hl vt-selected', false));
-  Object.values(vt.linkEls).forEach(el => el.classed('vt-hl', false));
-}
-
-function vtSelectPerson(id, recenter) {
-  if (!vt.built) return;
-  const p = MEMBERS_BY_ID[id];
-  if (!p) return;
-  vtClearHighlight();
-
-  // highlight ancestor chain root -> id
-  let cur = p;
-  const chainIds = [];
-  while (cur) {
-    chainIds.push(cur.id);
-    cur = cur.fatherId ? MEMBERS_BY_ID[cur.fatherId] : null;
-  }
-  chainIds.forEach(cid => {
-    if (vt.nodeEls[cid]) vt.nodeEls[cid].classed('vt-hl', true);
-    if (vt.linkEls[cid]) vt.linkEls[cid].classed('vt-hl', true);
-  });
-  if (vt.nodeEls[id]) vt.nodeEls[id].classed('vt-selected', true);
-
-  // info box
-  const box = document.getElementById('vtInfoBox');
-  box.innerHTML = `
-    <span class="close" onclick="document.getElementById('vtInfoBox').classList.remove('show')">✕</span>
-    <strong class="hindi-name" style="font-size:1.05rem;">${p.name}</strong><br>
-    <span style="font-style:italic;color:#a8481c;">${p.nameEn}</span><br>
-    <span style="font-size:0.8rem;">पीढ़ी / Gen ${p.gen} · ${p.branch}</span><br>
-    <button class="btn-view" style="margin-top:0.5rem;" onclick="openProfile('${p.id}')">पूरी प्रोफ़ाइल / Full Profile</button>`;
-  box.classList.add('show');
-
-  if (recenter) {
-    const nodeDatum = vt.root.descendants().find(d => d.id === id);
-    if (nodeDatum) {
-      const scale = 1.1;
-      const tx = vt.width / 2 - nodeDatum.x * scale;
-      const ty = vt.height / 2.5 - nodeDatum.y * scale;
-      vt.svg.transition().duration(700).call(vt.zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(scale));
-    }
-  }
-}
-
-function vtSearch() {
-  const q = document.getElementById('vtSearchInput').value.toLowerCase().trim();
-  const box = document.getElementById('vtSearchResults');
-  if (!q) { box.innerHTML = ''; return; }
-  const matches = MEMBERS.filter(m =>
-    m.name.toLowerCase().includes(q) || m.nameEn.toLowerCase().includes(q) || m.id.toLowerCase().includes(q)
-  ).slice(0, 8);
-  box.innerHTML = matches.length
-    ? matches.map(m => `
-        <div style="display:inline-block;margin:0.2rem;padding:0.4rem 0.8rem;background:#fff9f0;border:1px solid var(--border);border-radius:2px;cursor:pointer;font-size:0.9rem;"
-             onclick="vtSelectPerson('${m.id}', true);document.getElementById('vtSearchInput').value='';document.getElementById('vtSearchResults').innerHTML='';">
-          <span class="hindi-name">${m.name}</span> <span style="color:#7a5c3a;font-style:italic;">(${m.nameEn})</span>
-        </div>`).join('')
-    : `<p style="font-size:0.88rem;color:#7a5c3a;font-style:italic;">कोई परिणाम नहीं / No matches.</p>`;
-}
-
-// Build the visual tree the first time its tab is opened (keeps initial page load fast)
-const _origShowSection = showSection;
-showSection = function(id, linkEl) {
-  _origShowSection(id, linkEl);
-  if (id === 'visualtree') setTimeout(vtBuildTree, 30);
-};
-
 document.addEventListener('DOMContentLoaded', async () => {
   // ── Show "How to Edit" only to the site owner ──
   // Visit the site with ?admin=basuka2026 in the URL to reveal it, e.g.:
