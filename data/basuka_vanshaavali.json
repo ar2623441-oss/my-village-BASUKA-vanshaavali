@@ -16751,8 +16751,8 @@
   },
   {
    "id": "P1241",
-   "nameHi": "विभूतिनारायन",
-   "nameEn": "Vibhutinarayan",
+   "nameHi": "विभूति नारायण राय",
+   "nameEn": "Vibhuti Narayan Rai",
    "fatherId": "P1232",
    "childrenIds": [
     "P1261",
@@ -16766,8 +16766,8 @@
   },
   {
    "id": "P1242",
-   "nameHi": "श्यामरायण",
-   "nameEn": "Shyamrayan",
+   "nameHi": "श्याम नारायण राय",
+   "nameEn": "Shyam Narayan Rai",
    "fatherId": "P1232",
    "childrenIds": [
     "P1265",
@@ -16784,8 +16784,8 @@
   },
   {
    "id": "P1243",
-   "nameHi": "उदयनारायण",
-   "nameEn": "Udaynarayan",
+   "nameHi": "उदय नारायण राय",
+   "nameEn": "Uday Narayan Rai",
    "fatherId": "P1232",
    "childrenIds": [],
    "generation": 39,
@@ -16798,7 +16798,7 @@
    "id": "P1244",
    "nameHi": "दिवाकर राय",
    "nameEn": "Divakar Rai",
-   "fatherId": "P1238",
+   "fatherId": "P1243",
    "childrenIds": [],
    "generation": 40,
    "branch": "राजशाह वंश — पूरब पट्टी (Raj Shah / Poorab Patti)",
@@ -17008,7 +17008,7 @@
   {
    "id": "P1260",
    "nameHi": "स्वेतकशेखर",
-   "nameEn": "Swetakshekhar",
+   "nameEn": "Swetankshekhar",
    "fatherId": "P1257",
    "childrenIds": [],
    "generation": 41,
@@ -17033,8 +17033,8 @@
   },
   {
    "id": "P1262",
-   "nameHi": "अरविन्द",
-   "nameEn": "Arvind",
+   "nameHi": "अरविन्द राय",
+   "nameEn": "Arvind Rai",
    "fatherId": "P1241",
    "childrenIds": [
     "P1264"
