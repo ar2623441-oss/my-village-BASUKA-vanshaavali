@@ -1008,8 +1008,24 @@
   </div>
 
   <div class="sidebar-box">
+    <h4>📚 Reference / सन्दर्भ</h4>
+    <p style="font-size:0.86rem;color:#6b3410;line-height:1.6;">All lineage and history information on this site is referenced from the book <em>'सकरवार वंशावली' (Sakarwar Vanshaavali)</em>, written by <strong>स्व. सच्चिदानन्द राय</strong> (अवकाश प्राप्त शिक्षक), बसुका, गाजीपुर.</p>
+  </div>
+
+  <!-- <div class="sidebar-box">
     <h4>📞 Contact / संपर्क</h4>
-    <p style="font-size:0.88rem;color:#6b3410;">Original vanshaavali compiled by:<br><strong>स्व. सच्चिदानन्द राय</strong> (अवकाश प्राप्त शिक्षक), बसुका, गाजीपुर<br><br>To contribute corrections or additions to this website, contact the site maintainer.</p>
+    <p style="font-size:0.88rem;color:#5a3e28;">Original vanshaavali compiled by:<br><strong>स्व. सच्चिदानन्द राय</strong> (अवकाश प्राप्त शिक्षक), बसुका, गाजीपुर<br><br>To contribute corrections or additions to this website, contact the site maintainer.</p>
+  </div> -->
+  <div class="sidebar-box">
+    <h4>📞 Contact / संपर्क</h4>
+    <div style="display:flex;gap:0.8rem;align-items:center;margin-bottom:0.6rem;">
+      <img src="photos/abhishek.jpg" alt="Abhishek Rai" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);flex-shrink:0;">
+      <div>
+        <strong style="display:block;font-size:0.92rem;">Abhishek Rai</strong>
+        <span style="font-size:0.82rem;color:#7a5c3a;">s/o Mithlesh Rai</span>
+      </div>
+    </div>
+    <p style="font-size:0.88rem;color:#6b3410;line-height:1.6;">पूरब पट्टी, बसुका, गाजीपुर<br>Purab Patti, Basuka, Ghazipur<br><br>To contribute corrections or additions to this website, please reach out.</p>
   </div>
 </aside>
 </div>
@@ -1307,7 +1323,7 @@ function vtBuildTree() {
 
   // Fine-tuned spacing: wider horizontal gap between siblings so labels don't collide,
   // slightly shorter vertical gap since we now have the full viewport height to work with.
-  const dx = 60, dy = 112;
+  const dx = 34, dy = 108;
   const treeLayout = d3.tree().nodeSize([dx, dy]);
   treeLayout(root);
 
@@ -1341,7 +1357,7 @@ function vtBuildTree() {
   // zoom/pan — gentler wheel sensitivity for smoother, less jumpy zooming
   vt.zoom = d3.zoom()
     .scaleExtent([0.02, 5])
-    .wheelDelta((event) => -event.deltaY * (event.deltaMode ? 0.1 : 0.006))
+    .wheelDelta((event) => -event.deltaY * (event.deltaMode ? 0.05 : 0.0022))
     .on('zoom', (event) => {
       g.attr('transform', event.transform);
       g.classed('vt-zoomed-out', event.transform.k < 0.22);
@@ -1412,7 +1428,7 @@ function vtSelectPerson(id, recenter) {
   if (recenter) {
     const nodeDatum = vt.root.descendants().find(d => d.id === id);
     if (nodeDatum) {
-      const scale = 2.2;
+      const scale = 1.4;
       const tx = vt.width / 2 - nodeDatum.x * scale;
       const ty = vt.height / 2.5 - nodeDatum.y * scale;
       vt.svg.transition().duration(750).ease(d3.easeCubicOut).call(vt.zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(scale));

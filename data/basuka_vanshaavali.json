@@ -11337,7 +11337,8 @@
    "nameEn": "Girija",
    "fatherId": "P0836",
    "childrenIds": [
-    "P0892"
+    "P0892",
+    "P0893"
    ],
    "generation": 38,
    "branch": "भोजशाह वंश — पश्चिम पट्टी (Bhoj Shah / Paschim Patti)",
@@ -11351,7 +11352,8 @@
    "nameEn": "Parasnath",
    "fatherId": "P0836",
    "childrenIds": [
-    "P0893"
+    "P0894",
+    "P0895"
    ],
    "generation": 38,
    "branch": "भोजशाह वंश — पश्चिम पट्टी (Bhoj Shah / Paschim Patti)",
@@ -12023,10 +12025,13 @@
   },
   {
    "id": "P0891",
-   "nameHi": "अरुण",
-   "nameEn": "Arun",
+   "nameHi": "अरुण राय",
+   "nameEn": "Arun Rai",
    "fatherId": "P0837",
-   "childrenIds": [],
+   "childrenIds": [
+    "P1584",
+    "P1585"
+   ],
    "generation": 39,
    "branch": "भोजशाह वंश — पश्चिम पट्टी (Bhoj Shah / Paschim Patti)",
    "lineEnds": false,
@@ -12035,8 +12040,8 @@
   },
   {
    "id": "P0892",
-   "nameHi": "विनायक",
-   "nameEn": "Vinayak",
+   "nameHi": "विनायक राय",
+   "nameEn": "Vinayak Rai",
    "fatherId": "P0838",
    "childrenIds": [],
    "generation": 39,
@@ -12047,13 +12052,10 @@
   },
   {
    "id": "P0893",
-   "nameHi": "अखिलेश्वर",
-   "nameEn": "Akhileshwar",
-   "fatherId": "P0839",
-   "childrenIds": [
-    "P0894",
-    "P0895"
-   ],
+   "nameHi": "अखिलेश्वर राय",
+   "nameEn": "Akhileshwar Rai",
+   "fatherId": "P0838",
+   "childrenIds": [],
    "generation": 39,
    "branch": "भोजशाह वंश — पश्चिम पट्टी (Bhoj Shah / Paschim Patti)",
    "lineEnds": false,
@@ -12062,9 +12064,9 @@
   },
   {
    "id": "P0894",
-   "nameHi": "धर्मेन्दर",
-   "nameEn": "Dharmendar",
-   "fatherId": "P0893",
+   "nameHi": "धर्मेन्दर राय",
+   "nameEn": "Dharmendar Rai",
+   "fatherId": "P0839",
    "childrenIds": [],
    "generation": 40,
    "branch": "भोजशाह वंश — पश्चिम पट्टी (Bhoj Shah / Paschim Patti)",
@@ -12076,7 +12078,7 @@
    "id": "P0895",
    "nameHi": "धीरेन्दर राय",
    "nameEn": "Dheerendar Rai",
-   "fatherId": "P0893",
+   "fatherId": "P0839",
    "childrenIds": [],
    "generation": 40,
    "branch": "भोजशाह वंश — पश्चिम पट्टी (Bhoj Shah / Paschim Patti)",
@@ -16799,7 +16801,9 @@
    "nameHi": "दिवाकर राय",
    "nameEn": "Divakar Rai",
    "fatherId": "P1243",
-   "childrenIds": [],
+   "childrenIds": [
+    "P1586"
+   ],
    "generation": 40,
    "branch": "राजशाह वंश — पूरब पट्टी (Raj Shah / Poorab Patti)",
    "lineEnds": false,
@@ -21351,6 +21355,42 @@
    "branch": "राजशाह वंश — पूरब पट्टी (Raj Shah / Poorab Patti)",
    "lineEnds": false,
    "page": "63",
+   "notes": ""
+  },
+  {
+   "id": "P1584",
+   "nameHi": "पुष्पेन्द्र राय",
+   "nameEn": "Pushpendra Rai",
+   "fatherId": "P0891",
+   "childrenIds": [],
+   "generation": 40,
+   "branch": "भोजशाह वंश — पश्चिम पट्टी (Bhoj Shah / Paschim Patti)",
+   "lineEnds": true,
+   "page": "",
+   "notes": ""
+  },
+  {
+   "id": "P1585",
+   "nameHi": "निरपेन्द्र राय",
+   "nameEn": "Nirpendra Rai",
+   "fatherId": "P0891",
+   "childrenIds": [],
+   "generation": 40,
+   "branch": "भोजशाह वंश — पश्चिम पट्टी (Bhoj Shah / Paschim Patti)",
+   "lineEnds": true,
+   "page": "",
+   "notes": ""
+  },
+  {
+   "id": "P1586",
+   "nameHi": "यश राय",
+   "nameEn": "Yash Rai",
+   "fatherId": "P1244",
+   "childrenIds": [],
+   "generation": 41,
+   "branch": "भोजशाह वंश — पश्चिम पट्टी (Bhoj Shah / Paschim Patti)",
+   "lineEnds": true,
+   "page": "",
    "notes": ""
   }
  ]
