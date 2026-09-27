@@ -11,7 +11,6 @@ New in this version:
     is missing them - so when you add a brand-new person you only need to set
     id / nameHi / nameEn / fatherId and the rest is derived automatically.
   - Prints a summary you can sanity-check before opening the spreadsheet.
-
 Usage:
     pip install openpyxl --break-system-packages   (first time only)
     python regenerate_excel.py
